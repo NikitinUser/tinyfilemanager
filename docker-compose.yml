@@ -1,0 +1,40 @@
+version: "3.5"
+services:
+    nginx:
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+            args:
+                UID: ${UID}
+                CONFIG: local.conf
+            target: base
+        restart: always
+        ports:
+            - ${NGINX_HTTP_PORT:-8080}:80
+        volumes:
+            - ./public:/var/www/html/public:ro
+        depends_on:
+            - php-service
+        networks:
+            - tfm-network
+        healthcheck:
+            test: curl -f http://localhost/healthcheck
+            timeout: 5s
+    php-service:
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile
+            args:
+                UID: ${UID}
+                TZ: ${APP_TIMEZONE}
+            target: php-service
+        restart: always
+        volumes:
+            - .:/var/www/html
+        networks:
+            - tfm-network
+
+networks:
+    tfm-network:
+        name: tfm-network
+        attachable: true
