@@ -1,0 +1,15 @@
+{
+    "name": "nikitinuser/tinyfilemanager",
+    "autoload": {
+        "psr-4": {
+            "Nikitinuser\\Tinyfilemanager\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nikitinuser",
+            "email": "jo.kent@mail.ru"
+        }
+    ],
+    "require": {}
+}
