@@ -23,4 +23,4 @@ RUN addgroup --gid $UID --system app  \
 COPY docker/php/$PHP_INI /usr/local/etc/php/php.ini
 COPY docker/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 
-COPY public/index.php public/index.php
+COPY . .
